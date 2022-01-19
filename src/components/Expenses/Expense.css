@@ -1,0 +1,8 @@
+.expenses{
+    padding: 1rem;
+    width: 800px;
+    margin: 0 auto;
+        background-color: rgb(12, 180, 202);
+    border-radius: 5px;
+    max-width: 95%;
+}
