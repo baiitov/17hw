@@ -1,23 +1,12 @@
 import {useState} from 'react'
 import './ExpenseForm.css'
+import ReactDOM from 'react-dom';
 const ExpenseForm = (props)=>{
 
     const [title, setTitle] = useState('')
     const [amount, setAmount] = useState('')
     const [date, setDate] = useState('')
-    // const [userInput, setUserInput] = useState({
-    //     title:'',
-    //     amount:'',
-    //     date:'',
-    // })
-    // const inputChangeHandler =(event)=>{
-    //    const currentInput = event.target.name;
-    //    setUserInput({
-    //        ...userInput,
-    //        [currentInput]: event.target.value,
-
-    //    })
-    // }
+    const [show,setShow] = useState(false)
 
     const inputChangeHandler = (event)=>{
      const currentInput = event.target.name;
@@ -30,31 +19,6 @@ const ExpenseForm = (props)=>{
            }
        
     }
-    // const titleChangeHandler= (event)=>{
-    
-    // setUserInput ((prevState)=>{
-    //     return{
-    //         ...prevState,
-    //       title:event.target.value,
-
-    //     }
-    // })
-    // }
-    // const amountChangeHandler = (event)=>{
-    //     setUserInput({
-    //         ...userInput,
-    //       amount: event.target.value,
-    //     })
-      
-
-    // }
-    // const dateChangeHandler=(event)=>{
-    //     setUserInput({
-    //         ...userInput,
-    //         date:event.target.value,
-    //     })
-     
-    // }
     const submitHandler=(event)=>{
         event.preventDefault()
         // console.log(userInput)
@@ -64,9 +28,12 @@ const ExpenseForm = (props)=>{
             date:new Date (date),
         }
         props.onSaveExpenseData(currentData)
+        setShow(false)
     }
-    return <form onSubmit={submitHandler}>
-        <div className='new-expense__controls'>
+    let showForm ;
+    if(show){
+        showForm = <>
+         <div className='new-expense__controls'>
             <div className='new-expense__control'>
                 <label>title</label>
                 <input name='title' type="text" onChange={inputChangeHandler} />
@@ -83,8 +50,17 @@ const ExpenseForm = (props)=>{
         </div>
         <div className='new-expense__actions'>
             <button type='submit'>add Expense</button>
+            <button onClick={()=>setShow(false)}>Cancel</button>
         </div>
+        </>
+    }else{
+       showForm = <button onClick={()=>setShow(true)}>Add New Expense</button>
+    }
+    return <form onSubmit={submitHandler}>
+       {showForm}
     </form>
+  
+
     
 }
 export default ExpenseForm

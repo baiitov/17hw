@@ -22,7 +22,7 @@ const initState = [
 		amount: 1000,
 		date: new Date(2023, 6, 12),
 	},
-{
+	{
 		id: 'e4',
 		title: 'redmi',
 		amount: 300,
@@ -30,21 +30,19 @@ const initState = [
 	},
 ]
 function App() {
-    const [expenses, setExpenses] = useState(initState)
-	const addExpenseDataHandler=(expense)=>{
-		setExpenses((prevState)=>{
-          return [expense,...prevState]
-		  })
+	const [expenses, setExpenses] = useState(initState)
+	const addExpenseDataHandler = (expense) => {
+		setExpenses((prevState) => {
+			return [expense, ...prevState]
+		})
 	}
 
 	return (
 		<Card className='App'>
-						<NewExpenses onAddExpense={addExpenseDataHandler}/>
+			<NewExpenses onAddExpense={addExpenseDataHandler} />
 			<Expense data={expenses} />
 		</Card>
 	)
 }
-
-
 
 export default App
